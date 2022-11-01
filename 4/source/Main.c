@@ -1,25 +1,33 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdlib.h>
+#define CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
+unsigned long long int Fabonacci(unsigned int n);
 
-int main() {
-	int N;
-	unsigned long int  number[100000];
-	printf("請輸入要顯示多少個費斯數列:");
-	scanf("%d", &N);
-	number[0] = 0;
-	number[1] = 1;
-	number[2] = 1;
-	printf("%lu\n", number[0]);
-	printf("%lu\n", number[1]);
-	printf("%lu\n", number[1]);
-	for (int i = 3; i <= N; i++)
-	{
-		number[i] = number[i - 1] + number[i - 2];
-		printf("%lu\n", number[i]);
-	}
-
+int main()
+{
+	unsigned int n;
+	printf("Please enter n:");
+	scanf_s("%u", &n);
+	printf("%uth is:%u\n", n, Fabonacci(n));
+	printf("The largest Fabonacci is:%llu", Fabonacci(UINT_MAX));
 	system("pause");
 	return 0;
+}
+
+unsigned long long int Fabonacci(unsigned int n)
+{
+	unsigned int i;
+	unsigned long long int ans[100000];
+	ans[0] = 0, ans[1] = 1;
+	for (i = 2; i <= n; i++)
+	{
+		ans[i] = ans[i - 1] + ans[i - 2];
+		if (ans[i] < ans[i - 1])
+		{
+			break;
+		}
+	}
+	return ans[n - 1];
 }
